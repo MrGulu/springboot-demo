@@ -88,10 +88,18 @@
         <!-- json end-->
 
         <!--xml start-->
+        <!--
+        11-Oct-2019 19:37:00.483 SEVERE [RMI TCP Connection(3)-127.0.0.1] org.apache.catalina.startup.ContextConfig.processAnnotationsJar Unable to process Jar entry [module-info.class] from Jar [jar:file:/E:/workspace/springboot-demo/demo-web/target/demo-web-0.0.1-SNAPSHOT/WEB-INF/lib/jaxb-api-2.3.1.jar!/] for annotations
+ org.apache.tomcat.util.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 19
+        -->
+        <!--当使用外置tomcat的时候，会报上面的错，但是项目依然能起来。
+        发现就是因为下面这个包冲突了，设置<scope>provided</scope>解决。
+        -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>2.2.3</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -138,6 +146,9 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
+            <!--springboot自带的tomcat启动与之冲突，在此设置只编译不运行，没有传递性-->
+            <!--若是使用外置tomcat容器，就不设置下面-->
+            <!--<scope>provided</scope>-->
         </dependency>
 
         <dependency>
@@ -220,6 +231,13 @@
             <version>1.1.0.Final</version>
         </dependency>
         <!--shiro end-->
+
+        <!--如果加上这个，web启动失败。-->
+        <!--<dependency>-->
+            <!--<groupId>log4j</groupId>-->
+            <!--<artifactId>log4j</artifactId>-->
+            <!--<version>1.2.16</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 

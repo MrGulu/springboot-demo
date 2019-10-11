@@ -1,0 +1,22 @@
+#如果使用外置tomcat，下面不用设置
+#server:
+#  port: 9891
+#  servlet:
+#    context-path: /demo-web
+#配置dubbo消费者
+spring:
+  dubbo:
+    application:
+      name: springboot-dubbo-consumer
+    registry:
+      address: zookeeper://127.0.0.1:2181
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+server:
+  servlet:
+    context-path: /demo-web
+  tomcat:
+    uri-encoding: UTF-8
