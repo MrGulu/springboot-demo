@@ -3,6 +3,8 @@ package cn.tang.demo.base.service;
 import cn.tang.demo.base.daos.StudentMapper;
 import cn.tang.demo.base.entity.Student;
 import com.alibaba.dubbo.config.annotation.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -12,6 +14,8 @@ import org.springframework.util.ObjectUtils;
 @Service(version = "1.0")
 @Component
 public class StudentServiceImpl implements StudentService {
+
+    private static final Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
 
     @Autowired
     private StudentMapper studentMapper;
