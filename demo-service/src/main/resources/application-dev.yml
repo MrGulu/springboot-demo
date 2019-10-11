@@ -2,7 +2,7 @@
 
 # mybatis配置
 mybatis:
-  mapper-locations: classpath:daos/**.xml
+  mapper-locations: classpath:daos/**/*.xml
   type-aliases-package: cn.tang.demo
 # 数据库连接配置
 #dubbo配置
@@ -12,6 +12,7 @@ spring:
       name: springboot-dubbo-provider
     registry:
       address: zookeeper://127.0.0.1:2181
+    scan: cn.tang.demo
   datasource:
 #  如果使用下面配置，启动会报错，
 #java.sql.SQLException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
@@ -23,6 +24,7 @@ spring:
 #Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
 #    driver-class-name: com.mysql.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
+#  devtools熱部署時，兩個項目都要啟動，需要指定不同的port
   devtools:
     livereload:
       port: 35730

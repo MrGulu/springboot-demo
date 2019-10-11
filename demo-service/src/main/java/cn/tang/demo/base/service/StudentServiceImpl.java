@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-@Service(version = "1.0")
+@Service(version = "1.0",retries = 0,timeout = 30000)
 @Component
 public class StudentServiceImpl implements StudentService {
 
@@ -26,6 +26,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public String sayHello(String name) {
+        logger.info("接收到的消息：service receive msg:" + name);
         return "Hi,SpringBoot-Dubbo"+name;
     }
 

@@ -142,13 +142,16 @@
             <version>1.2</version>
         </dependency>
 
+        <!--org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.context.ApplicationContextException: Unable to start ServletWebServerApplicationContext due to missing ServletWebServerFactory bean.-->
+        <!--service启动时报错如上-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <!--springboot自带的tomcat启动与之冲突，在此设置只编译不运行，没有传递性-->
             <!--若是使用外置tomcat容器，就不设置下面-->
-            <!--<scope>provided</scope>-->
+            <!--但是不设置，service无法启动，如果把整个注释掉，utils中某些类就无法使用。-->
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

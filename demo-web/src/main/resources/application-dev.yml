@@ -16,7 +16,7 @@ spring:
       enabled: true
       force: true
 server:
-  servlet:
-    context-path: /demo-web
+#  servlet:
+#    context-path: /demo-web
   tomcat:
     uri-encoding: UTF-8

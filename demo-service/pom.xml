@@ -36,12 +36,6 @@
 			<artifactId>dubbo-spring-boot-starter</artifactId>
 			<!--此处若不加版本号，service注解无法找到alibaba包下的注解-->
 			<version>2.0.0</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>javassist</artifactId>
-					<groupId>org.javassist</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<!--zookeeper客户端-->
 		<dependency>
@@ -55,29 +49,23 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!--dubbo接口服务jar包依赖-->
-		<!--<dependency>-->
-			<!--<groupId>com.fhh.springboot</groupId>-->
-			<!--<artifactId>springboot-dubbo-interface</artifactId>-->
-			<!--<version>1.0.0</version>-->
-		<!--</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-data-jdbc</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-data-jpa</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-jdbc</artifactId>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
@@ -113,6 +101,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<!--如果使用springboot自帶的啟動方式，下面要加上，相當於以web的形式
+			對外提供服務！否則的話，就還是使用application的方式啟動服務！-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 	</dependencies>
 

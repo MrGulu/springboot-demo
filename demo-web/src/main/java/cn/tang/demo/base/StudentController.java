@@ -25,6 +25,7 @@ public class StudentController {
 
     @RequestMapping("/sayHello")
     public String sayHello(String name) {
+        logger.info("服務器接收到的數據web receive msg:" + name);
         return studentService.sayHello(name);
     }
 
