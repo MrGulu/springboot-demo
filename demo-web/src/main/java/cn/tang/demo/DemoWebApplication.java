@@ -1,6 +1,5 @@
 package cn.tang.demo;
 
-import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -15,7 +14,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @author tangwenlong
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@EnableDubboConfiguration
+//@EnableDubboConfiguration
 public class DemoWebApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

@@ -9,32 +9,33 @@
 		<relativePath>../demo-parent/pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 	<artifactId>demo-web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${demo.version}</version>
 	<name>demo-web</name>
 	<description>Demo project for Spring Boot</description>
 	<packaging>war</packaging>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>cn.tang</groupId>
-			<artifactId>demo-core</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.tang</groupId>
 			<artifactId>demo-api</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${demo.version}</version>
 		</dependency>
+
 		<!--springboot集成dubbo起步依赖-->
 		<dependency>
-			<groupId>com.alibaba.spring.boot</groupId>
-			<artifactId>dubbo-spring-boot-starter</artifactId>
-			<!--此处若不加版本号，service注解无法找到alibaba包下的注解-->
-			<version>2.0.0</version>
+			<groupId>io.dubbo.springboot</groupId>
+			<artifactId>spring-boot-starter-dubbo</artifactId>
+			<!-- org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/demo-web]]
+			Caused by: java.lang.StackOverflowError
+			不去除的话报上面错误
+			原本web和mq等starter也去除，但是发现这个duboo的必须去除，其他的不去除也可以？？！！！-->
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-logging</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
+			<version>1.0.0</version>
 		</dependency>
 		<!--zookeeper客户端-->
 		<dependency>
@@ -48,21 +49,15 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!--dubbo接口服务jar包依赖-->
-		<!--<dependency>-->
-			<!--<groupId>com.fhh.springboot</groupId>-->
-			<!--<artifactId>springboot-dubbo-interface</artifactId>-->
-			<!--<version>1.0.0</version>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
 		<!--如果添加了这个依赖，在启动web的时候，即使没在yml中设置redis相关信息，但是依然启动报错-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -70,6 +65,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.3</version>
 		</dependency>
 		<!--使用外置tomcat，<scope>provided</scope>设置，并且启动类需要继承重写方法-->
 		<dependency>
@@ -82,20 +82,16 @@
 			<artifactId>spring-data-rest-hal-browser</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
+		<!--如果不注释，dubbo启动有问题，报Caused by: java.lang.ClassCastException: cn.tang.demo.base.service.StudentService错误-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-devtools</artifactId>-->
+			<!--<scope>runtime</scope>-->
+			<!--<optional>true</optional>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -103,9 +99,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<!-- 引入log4j2依赖 -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<!--打出jar包或war包的包名，在使用外置tomcat部署项目时，
+			将war包放入webapp目录下启动后项目名就是该名-->
+		<finalName>demo-web</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

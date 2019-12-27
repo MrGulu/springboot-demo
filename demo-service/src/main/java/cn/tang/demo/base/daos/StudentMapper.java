@@ -2,6 +2,7 @@ package cn.tang.demo.base.daos;
 
 import cn.tang.demo.base.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
 public interface StudentMapper {

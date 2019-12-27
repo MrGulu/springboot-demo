@@ -16,10 +16,15 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <!--spring-boot-starter-parent中已经声明下述properties-->
+    <!--<properties>-->
+        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+        <!--<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
+        <!--<java.version>1.8</java.version>-->
+    <!--</properties>-->
+
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <demo.version>1.0-SNAPSHOT</demo.version>
     </properties>
 
     <modules>
@@ -28,13 +33,6 @@
         <module>../demo-service</module>
         <module>../demo-web</module>
     </modules>
-
-    <!--<dependencies>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-log4j</artifactId>-->
-        <!--</dependency>-->
-    <!--</dependencies>-->
 
     <build>
         <plugins>
@@ -46,22 +44,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--下面插件不能放到parent当中，否则install的时候会报错api和core项目找不到main class-->
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<fork>true</fork>-->
-                    <!--<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>-->
-                <!--</configuration>-->
-                <!--&lt;!&ndash;<dependencies>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<groupId>org.springframework</groupId>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<artifactId>springloaded</artifactId>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<version>1.2.5.RELEASE</version>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
-                <!--&lt;!&ndash;</dependencies>&ndash;&gt;-->
-            <!--</plugin>-->
         </plugins>
     </build>
 

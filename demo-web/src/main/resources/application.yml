@@ -1,3 +1,7 @@
 spring:
   profiles:
     active: dev
+
+#设置log4j2配置文件路径，默认log4j2-spring.xml则不需要设置
+#logging:
+#  config: classpath:log4j2-spring.xml

@@ -1,10 +1,8 @@
-
-
 # mybatis配置
 mybatis:
   mapper-locations: classpath:daos/**/*.xml
   type-aliases-package: cn.tang.demo
-# 数据库连接配置
+
 #dubbo配置
 spring:
   dubbo:
@@ -12,26 +10,46 @@ spring:
       name: springboot-dubbo-provider
     registry:
       address: zookeeper://127.0.0.1:2181
+    protocol:
+      name: dubbo
+      port: 20880
+      threads: 100
     scan: cn.tang.demo
+
+# 数据库连接配置
   datasource:
+    #    如果使用下面的驱动，启动会报错，
+    #Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+    #    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 #  如果使用下面配置，启动会报错，
 #java.sql.SQLException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
 #    url: jdbc:mysql://localhost:3306/design
-    url: jdbc:mysql://localhost:3306/design?characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://47.94.224.238:3306/design?characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
     username: root
     password: root
-#    如果使用下面的驱动，启动会报错，
-#Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
-#    driver-class-name: com.mysql.jdbc.Driver
-    driver-class-name: com.mysql.cj.jdbc.Driver
-#  devtools熱部署時，兩個項目都要啟動，需要指定不同的port
-  devtools:
-    livereload:
-      port: 35730
-server:
-  port: 9890
-#  # redis配置
-#  redis:
-#    host: 127.0.0.1
-#    port: 6379
+    hikari:
+      idle-timeout: 60000
+      maximum-pool-size: 30
+      minimum-idle: 10
+
+
+  # redis配置
+  redis:
+    host: 47.94.224.238
+    port: 6379
 #    password: redis
+    jedis:
+      pool:
+        max-active: 30
+        max-wait: -1ms
+        max-idle: 30
+        min-idle: 0
+
+#  devtools熱部署時，兩個項目都要啟動，需要指定不同的port
+#  devtools:
+#    livereload:
+#      port: 35730
+
+
+
