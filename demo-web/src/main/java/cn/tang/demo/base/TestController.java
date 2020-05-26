@@ -22,7 +22,8 @@ public class TestController {
         String flag = request.getParameter("flag");
         if (StringUtils.isEmpty(flag)) {
             throw new BusinessException(RspCodeEnum.ERR99993, "test Exception");
+        } else {
+            throw new NullPointerException("test NPE");
         }
-        return JsonResponse.success("OK");
     }
 }

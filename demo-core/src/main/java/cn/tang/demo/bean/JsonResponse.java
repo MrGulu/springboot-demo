@@ -13,7 +13,7 @@ public class JsonResponse implements Serializable {
 
     private static final String SUCCESS_CODE = "0";
 
-    private static final String ERROR_CODE = "0";
+    private static final String ERROR_CODE = "9999";
 
     private static final Map<String,Object> DEFAULT_DATA = new HashMap<>(8);
 
