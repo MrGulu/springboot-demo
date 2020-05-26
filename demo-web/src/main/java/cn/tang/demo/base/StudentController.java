@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StudentController {
 
-    /*service使用dubbo的service注解，web引用service时使用dubbo的@Reference注解才行！！！*/
+    /**service使用dubbo的service注解，web引用service时使用dubbo的@Reference注解才行！！！*/
     @Reference
     private StudentService studentService;
 

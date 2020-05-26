@@ -13,6 +13,8 @@ public class JsonResponse implements Serializable {
 
     private static final String SUCCESS_CODE = "0";
 
+    private static final String ERROR_CODE = "0";
+
     private static final Map<String,Object> DEFAULT_DATA = new HashMap<>(8);
 
     private JsonResponse() {
@@ -72,6 +74,20 @@ public class JsonResponse implements Serializable {
         jsonResponse.setCode(SUCCESS_CODE);
         jsonResponse.setMessage(message);
         jsonResponse.setData(data);
+        return jsonResponse;
+    }
+
+    /**
+     * @description 返回前端失败
+     * @param errcode 错误码
+     * @param message 错误信息
+     */
+    @SuppressWarnings("all")
+    public static JsonResponse fail(String message) {
+        JsonResponse jsonResponse = new JsonResponse();
+        jsonResponse.setCode(ERROR_CODE);
+        jsonResponse.setMessage(message);
+        jsonResponse.setData(DEFAULT_DATA);
         return jsonResponse;
     }
 
