@@ -5,19 +5,20 @@ import cn.tang.demo.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * @description 统一系统异常描述枚举类
  * @author tangwenlong
  */
 @Slf4j
 public enum RspCodeEnum implements IBussinessError {
 
     //系统公共异常
-    ERR99999("系统异常", "99999"),
+    ERR99999("系统异常！", "99999"),
     ERR99998("必传参数为空,或参数不符合规范！", "99998"),
     ERR99997("必传参数%s为空,或参数不符合规范！", "99998"),
     ERR99996("操作数据库异常！", "99997"),
     ERR99995("接口发送失败！", "99996"),
     ERR99994("未查到数据！", "99995"),
-    ERR99993("更新数据库失败,请重试！", "99994"),
+    ERR99993("%s", "99994"),
     ERR99992("发送HTTP请求失败！", "99993"),
     ERR99991("发送HTTP [%s]请求异常！url [%s]", "99991");
 

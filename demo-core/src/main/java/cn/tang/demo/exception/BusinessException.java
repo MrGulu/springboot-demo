@@ -1,80 +1,73 @@
 package cn.tang.demo.exception;
 
-import org.springframework.validation.BindingResult;
-
-import javax.validation.ConstraintViolation;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
+/**
+ * @description 自定义异常
+ * @author tangwenlong
+ */
 public class BusinessException extends RuntimeException {
+
   private static final long serialVersionUID = -5433056591268198786L;
-  private Map<String, String> errorMessages = new HashMap();
 
-  private String errorCode = null;
+  private static final String DEFAULT_ERROR_CODE = "99999";
 
-  public BusinessException() {
-  }
+  private static final Map<String, Object> DEFAULT_ERROR_MESSAGES = new HashMap<>(8);
+
+  private String errorCode;
+
+  private Map<String, Object> errorMessages;
 
   public String getErrorCode() {
     return errorCode;
   }
 
+  public Map<String, Object> getErrorMessages() {
+    return this.errorMessages;
+  }
+
+  public void setErrorCode(String errorCode) {
+    this.errorCode = errorCode;
+  }
+
+  public void setErrorMessages(Map<String, Object> errorMessages) {
+    this.errorMessages = errorMessages;
+  }
+
   public BusinessException(String message) {
     super(message);
-
-  }
-
-  public BusinessException(IBussinessError bussinessError) {
-    super(bussinessError.getMessage());
-    this.errorCode = bussinessError.getCode();
-  }
-
-  public BusinessException(IBussinessError bussinessError, String... details) {
-
-    super(bussinessError.getMessage(details));
-    this.errorCode = bussinessError.getCode();
+    this.errorCode = DEFAULT_ERROR_CODE;
+    this.errorMessages = DEFAULT_ERROR_MESSAGES;
   }
 
   public BusinessException(String errorCode, String message) {
     super(message);
     this.errorCode = errorCode;
+    this.errorMessages = DEFAULT_ERROR_MESSAGES;
+  }
+
+  public BusinessException(IBussinessError bussinessError) {
+    super(bussinessError.getMessage());
+    this.errorCode = bussinessError.getCode();
+    this.errorMessages = DEFAULT_ERROR_MESSAGES;
+  }
+
+  public BusinessException(IBussinessError bussinessError, String... details) {
+    super(bussinessError.getMessage(details));
+    this.errorCode = bussinessError.getCode();
+    this.errorMessages = DEFAULT_ERROR_MESSAGES;
   }
 
   public BusinessException(Throwable cause) {
     super(cause);
+    this.errorCode = DEFAULT_ERROR_CODE;
+    this.errorMessages = DEFAULT_ERROR_MESSAGES;
   }
 
   public BusinessException(String message, Throwable cause) {
     super(message, cause);
-  }
-
-  public Map<String, String> getErrorMessages() {
-    return this.errorMessages;
-  }
-
-  public static long getSerialversionuid() {
-    return -5433056591268198786L;
-  }
-
-  public void setErrorMessages(Set<? extends ConstraintViolation<? extends Object>> violations) {
-    for (ConstraintViolation violation : violations) {
-      String propertyPath = violation.getPropertyPath().toString();
-      String message = violation.getMessage();
-      this.errorMessages.put(propertyPath, message);
-    }
-  }
-
-  public void setErrorMessages(Map<String, String> errorMessages) {
-    this.errorMessages = errorMessages;
-  }
-
-  public void addErrorMessage(String fieldName, String message) {
-    this.errorMessages.put(fieldName, message);
-  }
-
-  public void addBindingResultTo(BindingResult result) {
-    for (String key : this.errorMessages.keySet())
-      result.rejectValue(key, "", (String) this.errorMessages.get(key));
+    this.errorCode = DEFAULT_ERROR_CODE;
+    this.errorMessages = DEFAULT_ERROR_MESSAGES;
   }
 }
