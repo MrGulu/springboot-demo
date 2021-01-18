@@ -69,7 +69,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.3</version>
+			<version>1.9.4</version>
 		</dependency>
 		<!--使用外置tomcat，<scope>provided</scope>设置，并且启动类需要继承重写方法-->
 		<dependency>
